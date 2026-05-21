@@ -10,6 +10,7 @@ var contactCheckFavorite = document.getElementById("checkFavorite");
 var contactCheckEmergncy = document.getElementById("checkEmergncy");
 var addContactModal = document.getElementById("addContactModal");
 var currentSearchTerm = "";
+var uploadedImageBase64 = "";
 
 var addBtn = document.getElementById("addBtn");
 var updateBtn = document.getElementById("updateBtn");
@@ -142,7 +143,7 @@ function addContact() {
 
   //* Memory-contactList
   var contact = {
-    image: imagePath,
+    image: uploadedImageBase64 ? uploadedImageBase64 : imagePath,
     name: contactNameInpute.value,
     number: contactNumperInpute.value,
     Email: contactEmailInpute.value,
@@ -212,9 +213,14 @@ function displayContacts(contacts) {
       ? contacts[i].cardColor
       : getCardGradient();
 
-    var backGroundStyle = hasImage
-      ? `background-image: url('${contacts[i].image}'); background-size: cover; background-position: center;`
-      : `background-image: ${savedColor};`;
+    var backGroundStyle = "";
+if (hasImage) {
+  // لو أولها data:image يعني دي صورة Base64 حقيقية، لو لأ يبقى مسار قديم
+  var imgSrc = contacts[i].image.startsWith("data:image") ? contacts[i].image : contacts[i].image;
+  backGroundStyle = `background-image: url('${imgSrc}'); background-size: cover; background-position: center;`;
+} else {
+  backGroundStyle = `background-image: ${savedColor};`;
+} 
 
     var crruntName = "";
     if (!hasImage && contacts[i].name) {
@@ -323,6 +329,7 @@ function displayContacts(contacts) {
 
 // & reset-AllInputes-->
 function resetAllInputes() {
+  uploadedImageBase64 = "";
     contactImageInpute.value = "";  
   contactNameInpute.value = "";
   contactNumperInpute.value = "";
@@ -342,19 +349,23 @@ function resetAllInputes() {
 
 //& Add to favoriteList--->
 function addFavoriteList() {
+  favoriteList = [];
   var imageName = contactImageInpute.files[0]?.name;
   var imagePath = imageName ? `./images/${imageName}` : "";
 
   //* Memory-contactFavorite
-  var contactFavorite = {
-    image: imagePath,
-    name: contactNameInpute.value,
-    number: contactNumperInpute.value,
-    cardColor: getCardGradient(),
-  };
-  //*Add Contacts-in-contactFavorite
-  favoriteList.push(contactFavorite);
-
+  for (var i = 0; i < contactList.length; i++) {
+    
+    if (contactList[i].checkFav === true) {
+      
+      var contactFavorite = {
+        image: contactList[i].image,
+        name: contactList[i].name,
+        number: contactList[i].number,
+        cardColor: contactList[i].cardColor,
+      };
+      favoriteList.push(contactFavorite);
+    }}
   //* displayContacts
   displayFavoriteList(favoriteList);
 
@@ -417,18 +428,23 @@ function displayFavoriteList(contacts) {
 }
 //& Add to EmergncyList--->
 function addEmergncyList() {
+  emergncyList = [];
   var imageName = contactImageInpute.files[0]?.name;
   var imagePath = imageName ? `./images/${imageName}` : "";
 
   //* Memory-contactEmergncy
-  var contactEmergncy = {
-    image: imagePath,
-    name: contactNameInpute.value,
-    number: contactNumperInpute.value,
-    cardColor: getCardGradient(),
-  };
-  //*Add Contacts-in-contactEmergncy
-  emergncyList.push(contactEmergncy);
+  for (var i = 0; i < contactList.length; i++) {
+    
+    if (contactList[i].checkEmr === true) {
+      var contactEmergncy = {
+        image: contactList[i].image,
+        name: contactList[i].name,
+        number: contactList[i].number,
+        cardColor: contactList[i].cardColor,
+      };
+      emergncyList.push(contactEmergncy);
+    }
+  }
 
   //* displayContacts
   displayEmergncyList(emergncyList);
@@ -585,16 +601,10 @@ function updateData() {
         return;
     }
 
-    
-    var finalImagePath = contactList[updateIndex].image || ""; 
-    
-    if (contactImageInpute.files.length > 0) {
-        var imageName = contactImageInpute.files[0].name;
-        finalImagePath = `./images/${imageName}`;
-    }
-
-  
-    contactList[updateIndex].image = finalImagePath; 
+    if (uploadedImageBase64) {
+    contactList[updateIndex].image = uploadedImageBase64;
+}
+   
     contactList[updateIndex].name = contactNameInpute.value.trim();
     contactList[updateIndex].number = contactNumperInpute.value;
     contactList[updateIndex].Email = contactEmailInpute.value;
@@ -609,14 +619,8 @@ function updateData() {
     displayContacts(contactList);
 
    
-    favoriteList = contactList.filter(c => c.checkFav === true);
-    localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
-    displayFavoriteList(favoriteList);
-
-    
-    emergncyList = contactList.filter(c => c.checkEmr === true);
-    localStorage.setItem("emergncyList", JSON.stringify(emergncyList));
-    displayEmergncyList(emergncyList);
+    addFavoriteList();
+    addEmergncyList();
 
     
     showLength();
@@ -701,18 +705,14 @@ function deleteInEmergncyList(index) {
 
 //& Centralized Function to sync LocalStorage, Filter Sub-lists, and Refresh UI --->
 function updateAppListsAndStorage() {
-  localStorage.setItem("contactList", JSON.stringify(contactList));
+ localStorage.setItem("contactList", JSON.stringify(contactList));
   displayContacts(contactList);
 
-  favoriteList = contactList.filter(c => c.checkFav === true);
-  localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
-  displayFavoriteList(favoriteList);
+  
+  addFavoriteList();
+  addEmergncyList();
 
- emergncyList = contactList.filter(c => c.checkEmr === true);
-  localStorage.setItem("emergncyList", JSON.stringify(emergncyList));
-  displayEmergncyList(emergncyList);
-
-        showLength();
+  showLength();
 }
 
 //& Func-Search-Contact --->
@@ -773,3 +773,17 @@ function highlightText(text, searchTerm) {
   // Replace the matched term with a styled Bootstrap background span
   return text.replace(regex, '<span class="bg-warning text-dark p-1 rounded-1">$1</span>');
 }
+
+//& Add Image In strage User [Extra]--->
+contactImageInpute.addEventListener("change", function () {
+  var file = contactImageInpute.files[0];
+  if (file) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      uploadedImageBase64 = e.target.result; 
+    };
+    reader.readAsDataURL(file);
+  } else {
+    uploadedImageBase64 = "";
+  }
+});
