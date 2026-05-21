@@ -601,8 +601,10 @@ function updateData() {
         return;
     }
 
-    if (uploadedImageBase64) {
-    contactList[updateIndex].image = uploadedImageBase64;
+  if (uploadedImageBase64 !== "") {
+    contactList[updateIndex].image = uploadedImageBase64; 
+}else if (!contactList[updateIndex].image) {
+    contactList[updateIndex].image = ""; 
 }
    
     contactList[updateIndex].name = contactNameInpute.value.trim();
