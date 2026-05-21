@@ -1,0 +1,34 @@
+دفتر العناوين: <i class="fa-solid fa-address-book"></i>
+
+علامة الجمع: <i class="fa-solid fa-plus"></i>
+
+الجرس: <i class="fa-solid fa-bell"></i>
+
+الترس (الإعدادات): <i class="fa-solid fa-gear"></i>
+
+المجموعة/المستخدمين: <i class="fa-solid fa-users"></i>
+
+النجمة: <i class="fa-solid fa-star"></i>
+
+القلب (نبض): <i class="fa-solid fa-heart-pulse"></i>
+
+العدسة (البحث): <i class="fa-solid fa-magnifying-glass"></i>
+
+سماعة الهاتف: <i class="fa-solid fa-phone"></i>
+
+الظرف (الإيميل): <i class="fa-solid fa-envelope"></i>
+
+الموقع: <i class="fa-solid fa-location-dot"></i>
+
+الصف الثاني (من الشمال لليمين):
+القلم: <i class="fa-solid fa-pen"></i>
+
+سلة المهملات: <i class="fa-solid fa-trash"></i>
+
+علامة الخطأ (X): <i class="fa-solid fa-xmark"></i>
+
+المستخدم: <i class="fa-solid fa-user"></i>
+
+الكاميرا: <i class="fa-solid fa-camera"></i>
+
+علامة الصح: <i class="fa-solid fa-check"></i>
