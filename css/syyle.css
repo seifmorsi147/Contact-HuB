@@ -313,13 +313,13 @@ ul {
       outline: 1;
       box-shadow: 0 0px 5px #8e51ffa1;
     }
-    .is-valid:focus{
+    .is-valid:focus {
       border: 0.0625rem solid #198754;
       outline: 1;
       box-shadow: 0 0px 5px #198754;
     }
-    .is-invalid:focus{
-       border: 0.0625rem solid #dc3545;
+    .is-invalid:focus {
+      border: 0.0625rem solid #dc3545;
       outline: 1;
       box-shadow: 0 0px 5px #dc3545;
     }
@@ -371,9 +371,16 @@ ul {
     max-width: 95%;
   }
 }
-
 main {
   margin-top: 110px;
+}
+@media (max-width: 391px) {
+  .head-data .inner {
+    width: 50%;
+  }
+  main .head .box{
+    gap: 7px !important;
+  }
 }
 main .head {
   .total,
@@ -389,16 +396,22 @@ main .head {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 0.875rem;
+    gap: 0.875rem ;
     .icon {
-      width: 48px !important;
-      height: 48px !important;
+      width: 48px;
+      height: 48px;
       border-radius: 0.75rem;
       line-height: 1.5rem;
       display: flex;
       justify-content: center;
       align-items: center;
       color: #fff;
+    }
+    @media (max-width: 391px) {
+      .icon {
+        width: 40px !important;
+        height: 40px !important;
+      }
     }
     div p:nth-child(1) {
       font-size: 14px;
@@ -539,7 +552,7 @@ main .my-section .display-contact {
     .image {
       width: 56px;
       height: 56px;
-      
+
       background-position: center;
       background-size: cover;
       border-radius: 0.75rem;
@@ -724,14 +737,14 @@ main .my-section .display-contact {
         background-color: oklch(96.168% 0.05915 95.9 / 0.301);
         color: oklch(0.828 0.189 84.429);
       }
-      .fav-after:hover{
+      .fav-after:hover {
         background-color: oklch(94.384% 0.06823 95.706);
       }
-        .emer-after {
+      .emer-after {
         background-color: oklab(95.194% 0.0233 0.00589 / 0.473);
         color: oklch(0.645 0.246 16.439);
       }
-      .emer-after:hover{
+      .emer-after:hover {
         background-color: oklab(86.466% 0.06557 0.01768);
       }
       .addFavorite:hover {
@@ -767,7 +780,7 @@ aside .favorite-card,
   }
   .card-header {
     border-radius: 16px 16px 0 0;
-  
+
     line-height: 1.5rem;
     padding: 1rem 1.25rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.034);
@@ -803,11 +816,11 @@ aside .favorite-card,
       }
     }
   }
-  .header-emr{
-    background-color: #FEF2F2;
+  .header-emr {
+    background-color: #fef2f2;
   }
-  .head-fav{
-    background-color: #FFF8EC;
+  .head-fav {
+    background-color: #fff8ec;
   }
   .icon-fav {
     background-image: linear-gradient(
@@ -827,9 +840,10 @@ aside .favorite-card,
     max-height: 20rem;
     overflow-y: auto;
     scrollbar-width: none;
-    .contact-fav,.contact-emr {
+    .contact-fav,
+    .contact-emr {
       cursor: pointer;
-      transition: all .2s;
+      transition: all 0.2s;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -880,16 +894,16 @@ aside .favorite-card,
       }
     }
   }
-  .contact-fav:hover{
+  .contact-fav:hover {
     background-color: oklch(0.987 0.022 95.277);
-    a{
+    a {
       background-color: oklab(0.732081 -0.146151 0.0460602);
       color: #fff;
     }
   }
-  .contact-emr:hover{
+  .contact-emr:hover {
     background-color: oklch(0.969 0.015 12.422);
-    a{
+    a {
       background-color: oklab(0.645315 0.235724 0.0695494);
       color: #fff;
     }
@@ -898,7 +912,7 @@ aside .favorite-card,
     background-color: oklab(0.95 -0.0497414 0.0151591);
     color: oklab(0.596 -0.13883 0.041849);
   }
-  .number-emr{
+  .number-emr {
     background-color: oklab(0.941 0.0292798 0.00653408);
     color: oklab(0.586 0.241177 0.0764364);
   }
