@@ -489,7 +489,7 @@ function displayEmergncyList(contacts) {
         .toUpperCase();
     }
     cartona += `
-   <div class="contact-emr ">
+   <div class="contact-emr mt-2">
                   <div class="image" style="${backGroundStyle}">
                     ${crruntName}
                   </div>
