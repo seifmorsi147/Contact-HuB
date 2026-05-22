@@ -926,4 +926,9 @@ aside .favorite-card,
     font-size: 0.75rem !important;
   }
 }
+@media screen and (min-width: 970px){
+  .my-top{
+    top: 90px;
+  }
+}
 /***** End Custome-Style *****/
