@@ -837,7 +837,7 @@ aside .favorite-card,
     );
   }
   .card-body {
-    max-height: 20rem;
+    max-height: 11rem;
     overflow-y: auto;
     scrollbar-width: none;
     .contact-fav,
