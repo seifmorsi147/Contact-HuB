@@ -9,6 +9,7 @@ var contactDescriptionInpute = document.getElementById("contactDescription");
 var contactCheckFavorite = document.getElementById("checkFavorite");
 var contactCheckEmergncy = document.getElementById("checkEmergncy");
 var addContactModal = document.getElementById("addContactModal");
+var organizeContent = document.getElementById("organize-content");
 var currentSearchTerm = "";
 var uploadedImageBase64 = "";
 
@@ -509,6 +510,7 @@ function displayEmergncyList(contacts) {
 
 //& Ubdate and Show length of total & favorite & Emergency---->
 function showLength() {
+  organizeContent.innerHTML=`Manage and organize your <span>${contactList.length}</span> contacts`
   document.getElementById("rowTotal").innerHTML =
     `<p>Total</p> <p>${contactList.length}</p>`;
   document.getElementById("rowFav").innerHTML =
